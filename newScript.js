@@ -79,7 +79,12 @@ function handleMouseDown() {
 
 
 function mouseOver(e) {
-	e.target.style.backgroundColor = 'black'
+	if(e.target.style.backgroundColor != 'black'){
+		e.target.style.backgroundColor = 'black'
+		return
+	}
+
+	e.target.style.backgroundColor = 'white'
 }
 
 
