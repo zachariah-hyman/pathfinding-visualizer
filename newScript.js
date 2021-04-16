@@ -1,4 +1,4 @@
-const initialNode = {
+let initialNode = {
 	cell: null,
 	x: 10, y: 12,
 	distance: 0,
@@ -20,7 +20,7 @@ const destinationNode = {
 // 	distance: Infinity,
 // 	visited: false
 // };
-
+let dragging = false
 let currentNode
 let finished = false
 let previousNode
@@ -79,8 +79,13 @@ function handleMouseDown() {
 
 
 function mouseOver(e) {
+	if(dragging == true){
+		e.target.style.backgroundColor = 'blue'
+		return
+	}
 	if(e.target.style.backgroundColor != 'black'){
-		e.target.style.backgroundColor = 'black'
+		if(e.target.style.backgroundColor != 'blue')
+			e.target.style.backgroundColor = 'black'
 		return
 	}
 
@@ -118,6 +123,8 @@ function createUnvisitedSet() { //also draws grid
 			grid.appendChild(cell)
 			if( j == initialNode.x && i == initialNode.y ) {
 				initialNode.cell = cell
+				cell.addEventListener('mousedown', drag)
+				cell.addEventListener('mouseup', drop)
 				nodes.push(initialNode)
 				startIndex = nodes.length - 1
 			}
@@ -133,6 +140,58 @@ function createUnvisitedSet() { //also draws grid
 	}
 
 	return startIndex
+}
+
+
+
+
+
+
+function drag(e) {
+	dragging = true
+	nodes.forEach(node => {
+		if(node != destinationNode){
+			node.cell.addEventListener('mouseup', drop)
+			node.cell.addEventListener('mouseout', mouseOut)
+			node.cell.addEventListener('mouseover', mouseOver)
+		}
+	});
+}
+
+
+
+
+
+
+function drop() {
+
+	nodes.forEach(node => {
+		node.cell.removeEventListener('mouseup', drop)
+		node.cell.removeEventListener('mouseout', mouseOut)
+		node.cell.removeEventListener('mouseover', mouseOver)
+		if(node != destinationNode){
+			if(node.cell.style.backgroundColor == 'blue'){
+				currentNode.distance = Infinity
+				initialNode = node
+				currentNode = node
+				currentNode.distance = 0
+				node.cell.addEventListener('mousedown', drag)
+				node.cell.addEventListener('mouseup', drop)
+				console.log(`${currentNode.x}, ${currentNode.y}`)
+			}
+		}
+	});
+
+	dragging = false
+}
+
+
+
+
+
+
+function mouseOut(e) {
+	e.target.style.backgroundColor = 'white'
 }
 
 
