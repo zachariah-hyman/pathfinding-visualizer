@@ -121,6 +121,7 @@ function createUnvisitedSet() { //also draws grid
 				nodes.push(destinationNode)
 			}
 			else{
+				cell.addEventListener('mousedown', mouseOver)
 				nodes.push({cell: cell, x: i, y: j, distance: Infinity, visited: false})
 			}
 		}
@@ -128,6 +129,17 @@ function createUnvisitedSet() { //also draws grid
 
 	return startIndex
 }
+
+
+
+
+
+
+
+function handleClick(e) {
+	e.target.style.backgroundColor = 'black'
+}
+
 
 
 
