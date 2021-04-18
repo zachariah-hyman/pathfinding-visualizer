@@ -30,19 +30,6 @@ let unvisited = []
 initializeDijkstra()
 document.onmousedown = function(){handleMouseDown()}
 document.onmouseup = function(){handleMouseUp()}
-document.onkeypress = function(){dijkstra()}
-const restartButton = document.getElementById('restartButton')
-restartButton.addEventListener('click', restart)
-
-
-
-
-
-
-
-function restart() {
-	window.location = '/'
-}
 
 
 

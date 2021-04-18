@@ -11,3 +11,9 @@ $ live-server
 ```
 
 This should automatically open a browser window with the code running.
+
+
+### Sources
+This project was inspired by https://clementmihailescu.github.io/Pathfinding-Visualizer/
+
+I taught myself how to use HTML, CSS, and JavaScript using a lot of helpful resources I found at W3schools.
